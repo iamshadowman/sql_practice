@@ -1,0 +1,42 @@
+-- The CountryCode for America is USA.
+
+CREATE TABLE CITY(
+    ID INT PRIMARY KEY,
+    NAME VARCHAR(17),
+    COUNTRYCODE VARCHAR(3),
+    DISTRICT VARCHAR(20),
+    POPULATION INT
+);
+
+INSERT INTO CITY
+(ID,NAME,COUNTRYCODE,DISTRICT,POPULATION)
+VALUES 
+(1,"ADAM","USA","NY",11225520),
+(2,"EVE","USA","LA",2552000),
+(3,"BOB","IND","MUMBAI",5555020),
+(4,"CHARLIE","RUS","MOSCOW",1100074),
+(5,"DELTA","USA","FLORIDA",99900),
+(6,"ALPHA","USA","CANADA",785422),
+(7,"BETA","IND","KOLKATA",5604960),
+(8,"GAMA","UK","ENGLAND",56296),
+(9,"PSI","JPN","TOKYO",9614356);
+
+-- 1. Query all columns for all American cities in the CITY table with populations larger than 100000.
+SELECT * FROM CITY
+WHERE COUNTRYCODE= "USA" AND POPULATION > 100000;
+
+-- 2. Query the NAME field for all American cities in the CITY table with populations larger than 120000.
+
+SELECT NAME, POPULATION FROM CITY
+WHERE COUNTRYCODE= "USA" AND POPULATION > 120000;
+
+-- 3. Query all columns (attributes) for every row in the CITY table.
+SELECT * FROM CITY;
+
+-- 4. Query all columns for a city in CITY with the ID 6.
+SELECT * FROM CITY
+WHERE ID=6;
+
+-- 5. Query all attributes of every Japanese city in the CITY table. The COUNTRYCODE for Japan is JPN.
+SELECT * FROM CITY
+WHERE COUNTRYCODE="JPN";
