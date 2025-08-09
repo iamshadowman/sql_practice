@@ -4,24 +4,24 @@ CREATE TABLE STATION(
   ID INT PRIMARY KEY,
   CITY VARCHAR(21),
   STATE VARCHAR(2),
-  LAT_N INT,
-  LONG_E INT
+  LAT_N FLOAT,
+  LONG_E FLOAT
 );
 
 INSERT INTO STATION
 (ID,CITY,STATE,LAT_N,LONG_E)
 VALUES
-(1,"KOLKATA","WB",22,88),
-(2,"MUMBAI","MH",23,79),
-(3,"DELHI","DH",26,82),
-(4,"CHENNAI","TN",18,84),
-(5,"KOLKATA","WB",22,87),
-(6,"PUNE","MH",23,80),
-(7,"AGRA","UP",18,83),
-(8,"ANDHERI","MH",23,80),
-(9,"ESPLANADE","WB",22,87),
-(10,"AGRA","UP",18,83),
-(11,"HOOGHLY","WB",22,88);
+(1,"KOLKATA","WB",22.5451,88.69665),
+(2,"MUMBAI","MH",23.4558,79.1412),
+(3,"DELHI","DH",26.5545,82.4153),
+(4,"CHENNAI","TN",18.1211,84.87425),
+(5,"KOLKATA","WB",22.78625,87.48532),
+(6,"PUNE","MH",23.245211,80.1478565),
+(7,"AGRA","UP",18.77411,83.48932),
+(8,"ANDHERI","MH",23.4555,80.7411),
+(9,"ESPLANADE","WB",22.5425,87.58982),
+(10,"AGRA","UP",18.98665,83.16842),
+(11,"HOOGHLY","WB",22.2563,88);
 
 SELECT * FROM STATION;
 
@@ -98,6 +98,36 @@ SELECT DISTINCT CITY AS NOT_STARTING_AND_ENDING_WITH_VOWELS
 FROM STATION
 WHERE LEFT(CITY,1) NOT IN ("A","E","I","O","U") 
 AND RIGHT(CITY,1) NOT IN ("A","E","I","O","U");
+
+-- 12. Query the following two values from the STATION table:
+-- 12.1. The sum of all values in LAT_N rounded to a scale of 2 decimal places.
+SELECT ROUND(SUM(LAT_N), 2)
+FROM STATION;                      -- USE OF ROUND
+
+-- 12.2. The sum of all values in LONG_W rounded to a scale of 2 decimal places.
+SELECT ROUND(SUM(LONG_E), 2)
+FROM STATION;
+
+-- 13. Query the sum of Northern Latitudes (LAT_N) from STATION having values greater than 19.7880 and less than 137.2345. 
+-- Truncate your answer to 4 decimal places
+SELECT TRUNCATE(SUM(LAT_N), 4)
+FROM STATION
+WHERE LAT_N > 19.7880 AND LAT_N < 137.2345;
+
+-- 14. Query the greatest value of the Northern Latitudes (LAT_N) from STATION that is less than 137.2345. 
+-- Truncate your answer to 4 decimal places
+SELECT TRUNCATE(MAX(LAT_N), 4) AS MaxLatitude
+FROM STATION
+WHERE LAT_N < 137.2345;
+
+-- SUBQUERY ******************************************
+SELECT CITY, TRUNCATE(LAT_N, 4) AS MaxLatitude
+FROM STATION
+WHERE LAT_N = (
+    SELECT MAX(LAT_N)
+    FROM STATION
+    WHERE LAT_N < 137.2345
+);
 
 
 
